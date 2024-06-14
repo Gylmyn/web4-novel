@@ -1,4 +1,4 @@
-  <header class="bg-primary shadow-xl shadow-secondary">
+  <header class="bg-primary shadow-md">
     <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-4">
       <div class="flex ">
         <div class="flex-1 md:flex md:items-center md:gap-12">
@@ -21,7 +21,7 @@
             </div>
             <ul class="flex items-center gap-6 text-base font-poppins font-semibold ">
               <li>
-                <a class="text-black transition hover:text-gray-500/75 " href="#"> Home </a>
+                <a class="text-black transition hover:text-gray-500/75 " href="../../view/homepage/index.php"> Home </a>
               </li>
 
               <li>

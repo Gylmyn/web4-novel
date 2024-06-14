@@ -11,10 +11,10 @@
 <body>
     <div class="max-w-full h-screen flex font-poppins">
         <div class="h-full w-1/2 bg-secondary flex justify-center items-center">
-            <img src="../../../assets/images/white-logo.png" alt="err" width=440>
+            <img src="../../../assets/images/auth-logo.png" alt="err" width=440>
         </div>
         <div class="h-full flex flex-col justify-center mx-auto">
-            <p class="font-bold pb-20 text-center">Welkam to Mobile Legends</p>
+            <p class="font-bold pb-20 text-center">Welcome to QNov</p>
             <div class="w-full bg-secondary px-4 py-2 flex gap-6 rounded font-semibold">
                 <a href="../login/index.php" class=" text-white px-10">Login</a>
                 <a href="#" class="bg-white text-secondary px-10 rounded">Register</a>
