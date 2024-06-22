@@ -19,18 +19,19 @@
                 <a href="../login/index.php" class=" text-white px-10">Login</a>
                 <a href="#" class="bg-white text-secondary px-10 rounded">Register</a>
             </div>
-            <form action="" class="pt-6">
+            <form action="../../../view/auth/register/index.php" class="pt-6" method="POST">
+               
                 <div class="flex flex-col pb-6">
                     <label class="font-semibold pb-3">Username</label>
-                    <input placeholder="Enter Your Username" type="text" class="focus:outline-secondary focus:outline-2 outline-secondary outline py-2 rounded-md px-4">
+                    <input name="username" placeholder="Enter Your Username" type="text" class="focus:outline-secondary focus:outline-2 outline-secondary outline py-2 rounded-md px-4">
                 </div>
                 <div class="flex flex-col pb-6">
                     <label class="font-semibold pb-3">Email</label>
-                    <input placeholder="Enter Your Email" type="email" class="focus:outline-secondary focus:outline-2 outline-secondary outline py-2 rounded-md px-4">
+                    <input name="email" placeholder="Enter Your Email" type="email" class="focus:outline-secondary focus:outline-2 outline-secondary outline py-2 rounded-md px-4">
                 </div>
                 <div class="flex flex-col">
                     <label class="font-semibold pb-3">Password</label>
-                    <input placeholder="Enter Your Password" type="password" class="focus:outline-secondary focus:outline-2 outline-secondary outline py-2 rounded-md px-4">
+                    <input name="password" placeholder="Enter Your Password" type="password" class="focus:outline-secondary focus:outline-2 outline-secondary outline py-2 rounded-md px-4">
                 </div>
                 <div class="flex items-center gap-2 pt-6">
                     <input type="checkbox" class="">
@@ -38,11 +39,11 @@
                 </div>
 
                 <div class="flex items-center  pt-12">
-                    <input type="submit" value="Register" class="bg-secondary w-full py-2 rounded-md font-bold text-white">
+                    <input type="submit" value="Register" name="register" class="bg-secondary w-full py-2 rounded-md font-bold text-white">
                 </div>
             </form>
         </div>
     </div>
 </body>
 
-</html>
+</html>S
