@@ -4,30 +4,30 @@ session_start();
 
 $login_message = "";
 
-// if(isset($_POST['isLogin'])){
-//     header("location: ../dashboard/index.php");
-// }
-
-
-if(isset($_POST['login'])){
+if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM user WHERE username = '$username'
-    AND password = '$password'";
-
+    // Check if username exists
+    $sql = "SELECT * FROM user WHERE username = '$username'";
     $result = $db->query($sql);
-    if($result->num_rows > 0){
-        $data = $result->fetch_assoc();
-        $_SESSION["username"] = $data["username"];
-        $_SESSION["isLogin"] = true;
-        header("location: ../../dashboard/index.php");
-    }else{
-        $login_message = "Login Gagal, Silahkan Ulangi";
-    }
 
+    if ($result->num_rows > 0) {
+        // Check if password is correct
+        $data = $result->fetch_assoc();
+        if ($data['password'] == $password) {
+            $_SESSION["username"] = $data["username"];
+            $_SESSION["isLogin"] = true;
+            header("location: ../../dashboard/index.php");
+        } else {
+            $login_message = "Password atau Username salah, silakan ulangi.";
+        }
+    } else {
+        $login_message = "Username tidak ditemukan.";
+    }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
