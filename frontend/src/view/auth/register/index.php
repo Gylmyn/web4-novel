@@ -8,6 +8,7 @@ if (isset($_POST['register'])) {
     $username = $_POST["username"];
     $email = $_POST["email"];
     $password = $_POST["password"];
+    // $hash_password =
 
     if (empty($username) || empty($email) || empty($password)) {
         $register_message = "Username, Email, dan Password tidak boleh kosong";
@@ -22,6 +23,7 @@ if (isset($_POST['register'])) {
         } catch (mysqli_sql_exception $e) {
             $register_message = "Username Sudah Digunakan";
         }
+        $db->close();
     }
 }
 ?>

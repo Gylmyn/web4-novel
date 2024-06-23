@@ -8,22 +8,26 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-
-    $sql = "SELECT * FROM user WHERE username = '$username'";
-    $result = $db->query($sql);
-
-    if ($result->num_rows > 0) {
-
-        $data = $result->fetch_assoc();
-        if ($data['password'] == $password) {
-            $_SESSION["username"] = $data["username"];
-            $_SESSION["isLogin"] = true;
-            header("location: ../../dashboard/index.php");
-        } else {
-            $login_message = "Password atau Username salah, silakan ulangi.";
-        }
+    if (empty($username) || empty($password)) {
+        $login_message = "Silahkan Masukkan Username dan Password";
     } else {
-        $login_message = "Username tidak ditemukan.";
+        $sql = "SELECT * FROM user WHERE username = '$username'";
+        $result = $db->query($sql);
+
+        if ($result->num_rows > 0) {
+
+            $data = $result->fetch_assoc();
+            if ($data['password'] == $password) {
+                $_SESSION["username"] = $data["username"];
+                $_SESSION["isLogin"] = true;
+                header("location: ../../dashboard/index.php");
+            } else {
+                $login_message = "Password atau Username salah, silakan ulangi.";
+            }
+        } else {
+            $login_message = "Akun Tidak Ditemukan.";
+        }
+        $db->close();
     }
 }
 ?>
