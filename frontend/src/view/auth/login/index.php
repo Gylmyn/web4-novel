@@ -1,4 +1,4 @@
-<?php 
+<?php
 include "../../../data/index.php";
 session_start();
 
@@ -8,12 +8,12 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Check if username exists
+
     $sql = "SELECT * FROM user WHERE username = '$username'";
     $result = $db->query($sql);
 
     if ($result->num_rows > 0) {
-        // Check if password is correct
+
         $data = $result->fetch_assoc();
         if ($data['password'] == $password) {
             $_SESSION["username"] = $data["username"];
