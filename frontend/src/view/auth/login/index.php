@@ -1,9 +1,31 @@
 <?php 
 include "../../../data/index.php";
+session_start();
+
+$login_message = "";
+
+// if(isset($_POST['isLogin'])){
+//     header("location: ../dashboard/index.php");
+// }
+
 
 if(isset($_POST['login'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
+
+    $sql = "SELECT * FROM user WHERE username = '$username'
+    AND password = '$password'";
+
+    $result = $db->query($sql);
+    if($result->num_rows > 0){
+        $data = $result->fetch_assoc();
+        $_SESSION["username"] = $data["username"];
+        $_SESSION["isLogin"] = true;
+        header("location: ../../dashboard/index.php");
+    }else{
+        $login_message = "Login Gagal, Silahkan Ulangi";
+    }
+
 }
 ?>
 
@@ -29,6 +51,7 @@ if(isset($_POST['login'])){
                 <a href="../register/index.php" class="text-white px-10">Register</a>
             </div>
             <form action="../../../view/auth/login/index.php" class="pt-6" method="POST">
+                <p><?= $login_message ?></p>
                 <div class="flex flex-col pb-6">
                     <label class="font-semibold pb-3">Username</label>
                     <input name="username" placeholder="Enter Your Username" type="text" class="focus:outline-secondary focus:outline-2 outline-secondary outline py-2 rounded-md px-4">

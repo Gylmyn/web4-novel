@@ -1,19 +1,31 @@
-<?php include "../../../data/index.php";
-if(isset($_POST['register'])){
+<?php
+include "../../../data/index.php";
+
+$register_message = "";
+
+
+if (isset($_POST['register'])) {
     $username = $_POST["username"];
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    $sql = "INSERT INTO user (username, email, password) VALUES 
-    ('$username', '$email', '$password')";
-     
-     if($db->query($sql)){
-        echo "Data Berhasil masuk";
-     }else{
-        echo "Data gagal Masuk";
-     }
+    if (empty($username) || empty($email) || empty($password)) {
+        $register_message = "Username, Email, dan Password tidak boleh kosong";
+    } else {
+        try {
+            $sql = "INSERT INTO user (username, email, password) VALUES ('$username', '$email', '$password')";
+            if ($db->query($sql)) {
+                $register_message = "Daftar Berhasil, Silahkan Login";
+            } else {
+                $register_message = "Daftar Gagal, Silahkan Ulangi";
+            }
+        } catch (mysqli_sql_exception $e) {
+            $register_message = "Username Sudah Digunakan";
+        }
+    }
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -38,7 +50,9 @@ if(isset($_POST['register'])){
                 <a href="#" class="bg-white text-secondary px-10 rounded">Register</a>
             </div>
             <form action="../../../view/auth/register/index.php" class="pt-6" method="POST">
-
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                    <?= $register_message ?>
+                </div>
                 <div class="flex flex-col pb-6">
                     <label class="font-semibold pb-3">Username</label>
                     <input name="username" placeholder="Enter Your Username" type="text" class="focus:outline-secondary focus:outline-2 outline-secondary outline py-2 rounded-md px-4">
@@ -64,4 +78,4 @@ if(isset($_POST['register'])){
     </div>
 </body>
 
-</html>S
+</html>
