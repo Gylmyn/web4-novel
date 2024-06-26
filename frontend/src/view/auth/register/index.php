@@ -2,18 +2,28 @@
 include "../../../data/index.php";
 
 $register_message = "";
+$err_username = "";
+$err_email = "";
+$err_password = "";
 
 
 if (isset($_POST['register'])) {
     $username = $_POST["username"];
     $email = $_POST["email"];
     $password = $_POST["password"];
+    $hash_password =hash("sha256",$password);
 
-    if (empty($username) || empty($email) || empty($password)) {
-        $register_message = "Username, Email, dan Password tidak boleh kosong";
+    if (empty($username)) {
+        $err_username = "Username tidak boleh kosong";
+    } 
+    if (empty($email)) {
+        $err_email = "email tidak boleh kosong";
+    } 
+    if (empty($password)) {
+        $err_password = "password tidak boleh kosong";
     } else {
         try {
-            $sql = "INSERT INTO user (username, email, password) VALUES ('$username', '$email', '$password')";
+            $sql = "INSERT INTO user (username, email, password) VALUES ('$username', '$email', '$hash_password')";
             if ($db->query($sql)) {
                 $register_message = "Daftar Berhasil, Silahkan Login";
             } else {
@@ -23,6 +33,7 @@ if (isset($_POST['register'])) {
             $register_message = "Username Sudah Digunakan";
         }
     }
+    $db->close();
 }
 ?>
 
@@ -50,20 +61,29 @@ if (isset($_POST['register'])) {
                 <a href="#" class="bg-white text-secondary px-10 rounded">Register</a>
             </div>
             <form action="../../../view/auth/register/index.php" class="pt-6" method="POST">
-                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                <div class="text-danger" role="alert">
                     <?= $register_message ?>
                 </div>
                 <div class="flex flex-col pb-6">
                     <label class="font-semibold pb-3">Username</label>
                     <input name="username" placeholder="Enter Your Username" type="text" class="focus:outline-secondary focus:outline-2 outline-secondary outline py-2 rounded-md px-4">
+                    <div class="text-danger" role="alert">
+                    <?= $err_username ?>
+                </div>
                 </div>
                 <div class="flex flex-col pb-6">
                     <label class="font-semibold pb-3">Email</label>
                     <input name="email" placeholder="Enter Your Email" type="email" class="focus:outline-secondary focus:outline-2 outline-secondary outline py-2 rounded-md px-4">
+                    <div class="text-danger" role="alert">
+                    <?= $err_email ?>
+                </div>
                 </div>
                 <div class="flex flex-col">
                     <label class="font-semibold pb-3">Password</label>
                     <input name="password" placeholder="Enter Your Password" type="password" class="focus:outline-secondary focus:outline-2 outline-secondary outline py-2 rounded-md px-4">
+                    <div class="text-danger" role="alert">
+                    <?= $err_password ?>
+                </div>
                 </div>
                 <div class="flex items-center gap-2 pt-6">
                     <input type="checkbox" class="">
