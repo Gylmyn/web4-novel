@@ -3,7 +3,7 @@
 $hostname = "localhost";
 $username = "root";
 $password = "";
-$database_name = "qnov_basis";
+$database_name = "qnov";
 
 $db = mysqli_connect($hostname, $username, $password, $database_name);
 

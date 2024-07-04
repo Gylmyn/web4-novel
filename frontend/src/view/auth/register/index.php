@@ -23,7 +23,7 @@ if (isset($_POST['register'])) {
         $err_password = "password tidak boleh kosong";
     } else {
         try {
-            $sql = "INSERT INTO user (username, email, password) VALUES ('$username', '$email', '$hash_password')";
+            $sql = "INSERT INTO akun (username, email, password) VALUES ('$username', '$email', '$hash_password')";
             if ($db->query($sql)) {
                 $register_message = "Daftar Berhasil, Silahkan Login";
             } else {
